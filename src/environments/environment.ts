@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  firebaseConfig: {
+    apiKey: 'AIzaSyDBI0_TN7ZPEcZdtOQbY7Tx5MyikInUBhA',
+    authDomain: 'oathdotvision.firebaseapp.com',
+    databaseURL: 'https://oathdotvision.firebaseio.com',
+    projectId: 'oathdotvision',
+    storageBucket: 'oathdotvision.appspot.com',
+    messagingSenderId: '57498951627',
+    appId: '1:57498951627:web:ee77570cacf4f55e9ae04e',
+    measurementId: 'G-HTVM8GHBD5'
+  }
 };
 
 /*
