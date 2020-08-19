@@ -65,8 +65,20 @@ ion-header > ion-toolbar {
   --min-height: 40px;
 }
 
+.cradle {
+  background-image: url("assets/bg/cradle.png") !important;
+}
+
+.hinterland {
+  background-image: url("assets/bg/hinterland.png") !important;
+}
+
+.provinces {
+  background-image: url("assets/bg/provinces.png") !important;
+}
+
 .content-container {
-  background-image: url("assets/oath.png") !important;
+  background-image: url("assets/bg/oath.png") !important;
   background-position: 50% 50%;
   background-size: cover;
 
@@ -99,4 +111,9 @@ ion-list-header {
 .action-button {
   --padding-start: 3px;
   --padding-end: 3px;
+}
+
+.visible-name {
+  color: #fff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
