@@ -1,0 +1,22 @@
+
+ion-card {
+  height: 275px;
+  max-height: 275px;
+
+  &.can-hover {
+    cursor: pointer;
+
+    &:hover {
+      border-color: #60220E;
+      box-shadow: 0 0 10px #60220E;
+    }
+  }
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: calc(275px - 81px);
+}

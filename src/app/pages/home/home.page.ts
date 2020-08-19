@@ -1,14 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { ChronicleService } from '../../services/chronicle.service';
+import { Chronicle } from '../../interfaces';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  // https://github.com/angular/angularfire/blob/master/docs/firestore/querying-collections.md
+  chronicles$: Observable<Chronicle[]>;
 
-  constructor() {}
+  constructor(public chronicleService: ChronicleService) {}
 
+  ngOnInit() {
+    this.chronicles$ = this.chronicleService.getRecentChronicles();
+  }
 }

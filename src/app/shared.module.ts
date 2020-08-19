@@ -8,18 +8,21 @@ import { ChronicleEditComponent } from './components/shared/chronicle-edit/chron
 import { NavLinksComponent } from './components/shared/nav-links/nav-links.component';
 import { SpriteComponent } from './components/shared/sprite/sprite.component';
 import { ViewCardComponent } from './components/modals/view-card/view-card.component';
+import { ChronicleCardComponent } from './components/shared/chronicle-card/chronicle-card.component';
 
 @NgModule({
   declarations: [
     NavLinksComponent,
     ChronicleEditComponent,
     SpriteComponent,
+    ChronicleCardComponent,
     ViewCardComponent
   ],
   exports: [
     NavLinksComponent,
     ChronicleEditComponent,
     SpriteComponent,
+    ChronicleCardComponent,
     ViewCardComponent
   ],
   imports: [

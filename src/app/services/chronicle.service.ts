@@ -48,4 +48,11 @@ export class ChronicleService {
   getChronicle(id: string): Observable<Chronicle> {
     return this.afs.doc<Chronicle>(`chronicles/${id}`).valueChanges().pipe(first());
   }
+
+  getRecentChronicles(): Observable<Chronicle[]> {
+    return this.afs
+      .collection('chronicles', ref => ref.orderBy('timestamp').limit(6))
+      .valueChanges()
+      .pipe(first()) as Observable<Chronicle[]>;
+  }
 }
