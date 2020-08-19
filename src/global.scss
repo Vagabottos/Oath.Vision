@@ -24,3 +24,70 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+  font-family: "Goudy Header";
+  src: url("assets/font/GoudyTextMT-LombardicCapitals.svg") format("svg"),
+       url("assets/font/GoudyTextMT-LombardicCapitals.ttf") format("truetype"),
+       url("assets/font/GoudyTextMT-LombardicCapitals.woff") format("woff"),
+       url("assets/font/GoudyTextMT-LombardicCapitals.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Goudy Body";
+  src: url("assets/font/GoudyOldStyleT-Regular.svg") format("svg"),
+       url("assets/font/GoudyOldStyleT-Regular.ttf") format("truetype"),
+       url("assets/font/GoudyOldStyleT-Regular.woff") format("woff"),
+       url("assets/font/GoudyOldStyleT-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --ion-font-family: "Goudy Body", Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+.formatted-name::first-letter {
+  font-family: "Goudy Header", Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+* {
+  letter-spacing: 2px;
+}
+
+ion-button {
+  text-transform: none;
+}
+
+ion-header > ion-toolbar {
+  --min-height: 40px;
+}
+
+.content-container {
+  background-image: url("assets/oath.png") !important;
+  background-position: 50% 50%;
+  background-size: cover;
+
+  min-height: calc(100vh - 80px);
+  max-height: calc(100vh - 80px);
+
+  position: relative;
+
+  overflow-y: auto;
+}
+
+.form-error {
+  ion-text {
+    font-size: 0.75rem;
+
+    &::before {
+      content: '· ';
+    }
+  }
+}
+
+ion-fab {
+  position: fixed;
+}

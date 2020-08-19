@@ -20,7 +20,8 @@ export enum PlayerColor {
   Yellow = 'Yellow',
   White = 'White',
   Blue = 'Blue',
-  Red = 'Red'
+  Red = 'Red',
+  Chancellor = 'Chancellor'
 }
 
 export enum Citizenship {

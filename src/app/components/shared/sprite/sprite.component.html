@@ -1,0 +1,30 @@
+
+<div class="icon-container"
+     [style.min-width]="innerWidth"
+     [style.max-width]="innerWidth"
+     [style.min-height]="innerHeight"
+     [style.max-height]="innerHeight"
+     [style.transform]="scale">
+
+  <picture class="sprite"
+           [style.object-position]="coordinates"
+           [style.min-width]="innerWidth"
+           [style.max-width]="innerWidth"
+           [style.min-height]="innerHeight"
+           [style.max-height]="innerHeight">
+
+    <source [srcset]="'assets/spritesheet/+' + type + '.webp'" type="image/webp">
+    <source [srcset]="'assets/spritesheet/+' + type + '.png'" type="image/png">
+    
+    <img class="sprite"
+         decoding="async"
+         [alt]="type + ' icon'"
+         [src]="sheetUrl"
+         [style.object-position]="coordinates"
+         [style.min-width]="innerWidth"
+         [style.max-width]="innerWidth"
+         [style.min-height]="innerHeight"
+         [style.max-height]="innerHeight"
+        />
+  </picture>
+</div>

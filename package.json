@@ -9,7 +9,14 @@
     "start": "ng serve -o --port 6984 --host=0.0.0.0",
     "build": "ng build -c prod",
     "test": "npm run lint && npm run build",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "asset:pack": "npm run asset:pack:edifice && npm run asset:pack:relic && npm run asset:pack:site && npm run asset:pack:world && npm run asset:crush",
+    "asset:pack:edifice": "node scripts/pack-edifices",
+    "asset:pack:relic": "node scripts/pack-relics",
+    "asset:pack:site": "node scripts/pack-sites",
+    "asset:pack:world": "node scripts/pack-world",
+    "asset:crush": "node scripts/pngquant",
+    "postinstall": "npm run asset:pack"
   },
   "private": true,
   "dependencies": {
@@ -24,12 +31,15 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
+    "@seiyria/oath-parser": "^1.0.1",
+    "censor-sensor": "^1.0.6",
     "firebase": "^7.18.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
+    "@angular-devkit/architect": ">= 0.900 < 0.1100",
     "@angular-devkit/build-angular": "~0.1000.0",
     "@angular/cli": "~10.0.5",
     "@angular/compiler": "~10.0.0",
@@ -38,14 +48,18 @@
     "@ionic/angular-toolkit": "^2.3.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
-    "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
-    "typescript": "~3.9.5",
-    "@angular-devkit/architect": ">= 0.900 < 0.1100",
     "firebase-tools": "^8.0.0",
     "fuzzy": "^0.1.3",
+    "imagemin": "^7.0.1",
+    "imagemin-pngquant": "^9.0.0",
+    "imagemin-webp": "^6.0.0",
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",
-    "open": "^7.0.3"
+    "open": "^7.0.3",
+    "rimraf": "^3.0.2",
+    "spritesheet-js": "^1.2.6",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "typescript": "~3.9.5"
   }
 }

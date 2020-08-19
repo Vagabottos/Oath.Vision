@@ -1,9 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>New Chronicle</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <span class="formatted-name">New Chronicle</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <app-nav-links></app-nav-links>
 
+  <div class="content-container">
+    <app-chronicle-edit></app-chronicle-edit>
+  </div>
 </ion-content>

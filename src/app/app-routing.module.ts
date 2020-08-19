@@ -3,13 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'search',
@@ -20,8 +15,17 @@ const routes: Routes = [
     loadChildren: () => import('./pages/new-chronicle/new-chronicle.module').then( m => m.NewChroniclePageModule)
   },
   {
-    path: 'view-chronicle',
+    path: 'from-chronicle/:id',
+    loadChildren: () => import('./pages/new-chronicle/new-chronicle.module').then( m => m.NewChroniclePageModule)
+  },
+  {
+    path: 'view-chronicle/:id',
     loadChildren: () => import('./pages/view-chronicle/view-chronicle.module').then( m => m.ViewChroniclePageModule)
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   },
 
 ];

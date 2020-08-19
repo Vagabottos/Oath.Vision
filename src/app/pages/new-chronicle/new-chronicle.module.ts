@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { NewChroniclePageRoutingModule } from './new-chronicle-routing.module';
 
 import { NewChroniclePage } from './new-chronicle.page';
+import { SharedModule } from '../../shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NewChroniclePageRoutingModule
+    NewChroniclePageRoutingModule,
+    SharedModule
   ],
   declarations: [NewChroniclePage]
 })

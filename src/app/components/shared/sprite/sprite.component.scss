@@ -1,0 +1,19 @@
+.sprite {
+  object-fit: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.icon-container {
+  position: relative;
+  transform-origin: top left;
+}
+
+:host {
+  display: inline-block;
+
+  &.inline-display {
+    margin-right: 8px;
+  }
+}

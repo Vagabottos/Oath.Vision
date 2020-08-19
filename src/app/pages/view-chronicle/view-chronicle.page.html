@@ -1,9 +1,17 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>View Chronicle</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <span class="formatted-name">View Chronicle</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <app-nav-links></app-nav-links>
 
+  <div class="content-container">
+    <div>
+      {{ chronicle | json }}
+    </div>
+  </div>
 </ion-content>
