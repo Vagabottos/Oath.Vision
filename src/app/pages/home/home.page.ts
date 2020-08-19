@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  // https://github.com/angular/angularfire/blob/master/docs/firestore/querying-collections.md
+
   constructor() {}
 
 }

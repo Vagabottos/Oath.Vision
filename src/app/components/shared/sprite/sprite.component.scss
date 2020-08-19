@@ -12,6 +12,7 @@
 
 :host {
   display: inline-block;
+  outline: 1px solid #aaa;
 
   &.inline-display {
     margin-right: 8px;

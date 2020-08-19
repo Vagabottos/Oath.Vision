@@ -21,6 +21,15 @@ const sheetTypes: any = {
 })
 export class SpriteComponent implements OnInit {
 
+  get shouldShowBack() {
+    return this.showBack && this.type !== 'edifice';
+  }
+
+  get sheetUrl() {
+    if (this.shouldShowBack) { return `assets/cardback/${this.type}.png`; }
+    return `assets/spritesheet/+${this.type}.png`;
+  }
+
   get spriteSheet() {
     return sheetTypes[this.type];
   }
@@ -46,6 +55,9 @@ export class SpriteComponent implements OnInit {
 
   @Input()
   public type: 'edifice'|'relic'|'site'|'world';
+
+  @Input()
+  public showBack: boolean;
 
   @Input()
   @HostBinding('class.inline-display')
@@ -78,7 +90,7 @@ export class SpriteComponent implements OnInit {
   }
 
   private get widthNumber(): number {
-    return get(this.spriteSheet.frames, [`${this.name}.png`, 'frame', 'w'], 0);
+    return get(this.spriteSheet.frames, [`${this.imageName}.png`, 'frame', 'w'], 0);
   }
 
   @HostBinding('style.max-height')
@@ -93,12 +105,13 @@ export class SpriteComponent implements OnInit {
   }
 
   private get heightNumber(): number {
-    return get(this.spriteSheet.frames, [`${this.name}.png`, 'frame', 'h'], 0);
+    return get(this.spriteSheet.frames, [`${this.imageName}.png`, 'frame', 'h'], 0);
   }
 
   get coordinates() {
+    if (this.shouldShowBack) { return '0px 0px'; }
     // style.object-position
-    const spriteRef = this.spriteSheet.frames[this.name + '.png'];
+    const spriteRef = this.spriteSheet.frames[this.imageName + '.png'];
     if (!spriteRef) { return '0px 0px'; }
 
     return `-${spriteRef.frame.x}px -${spriteRef.frame.y}px`;

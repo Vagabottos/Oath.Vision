@@ -45,11 +45,11 @@
   font-style: normal;
 }
 
-:root {
+:root, .body-text {
   --ion-font-family: "Goudy Body", Roboto, "Helvetica Neue", sans-serif !important;
 }
 
-.formatted-name::first-letter {
+.formatted-name::first-letter, .header-text {
   font-family: "Goudy Header", Roboto, "Helvetica Neue", sans-serif !important;
 }
 
@@ -90,4 +90,13 @@ ion-header > ion-toolbar {
 
 ion-fab {
   position: fixed;
+}
+
+ion-list-header {
+  font-size: 1.25rem;
+}
+
+.action-button {
+  --padding-start: 3px;
+  --padding-end: 3px;
 }

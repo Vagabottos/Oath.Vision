@@ -9,10 +9,10 @@ const init = async () => {
     destination: 'src/assets/spritesheet',
     plugins: [
       pngquant({ 
-        quality: [0.1, 0.2] 
+        quality: [0.2, 0.3] 
       }),
       webp({
-        quality: 40
+        quality: 50
       })
     ]
   });

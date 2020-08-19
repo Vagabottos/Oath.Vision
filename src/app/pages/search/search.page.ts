@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchPage implements OnInit {
 
+  // https://github.com/angular/angularfire/blob/master/docs/firestore/querying-collections.md
+
   constructor() { }
 
   ngOnInit() {

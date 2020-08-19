@@ -1,0 +1,16 @@
+
+.action-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 100;
+}
+
+app-sprite.ruined {
+  filter: grayscale(1);
+}
+
+.world-barrier {
+  text-align: center;
+  font-size: 1.2rem;
+}

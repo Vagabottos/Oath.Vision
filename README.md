@@ -4,7 +4,9 @@ A viewer and lineage tracker for Oath board games.
 
 ## Setup
 
-`npm install`
+* Install GraphicsMagick
+* Install ImageMagick (_you need legacy tools checked when doing this_)
+* `npm install`
 
 ## Developing
 

@@ -1,0 +1,21 @@
+  
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      View Card
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        Close
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <div class="content-container">
+    <app-sprite [name]="cardName" [type]="cardType" scaleX="1.5" scaleY="1.5"></app-sprite>
+  </div>
+
+</ion-content>

@@ -13,12 +13,14 @@
            [style.min-height]="innerHeight"
            [style.max-height]="innerHeight">
 
-    <source [srcset]="'assets/spritesheet/+' + type + '.webp'" type="image/webp">
-    <source [srcset]="'assets/spritesheet/+' + type + '.png'" type="image/png">
+     <source *ngIf="!shouldShowBack" [srcset]="'assets/spritesheet/+' + type + '.webp'" type="image/webp">
+     <source *ngIf="!shouldShowBack" [srcset]="'assets/spritesheet/+' + type + '.png'" type="image/png">
+
+     <source *ngIf="shouldShowBack"  [srcset]="'assets/cardback/' + type + '.png'" type="image/png">
     
     <img class="sprite"
          decoding="async"
-         [alt]="type + ' icon'"
+         [alt]="type + ' card'"
          [src]="sheetUrl"
          [style.object-position]="coordinates"
          [style.min-width]="innerWidth"

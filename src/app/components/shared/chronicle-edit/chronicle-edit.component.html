@@ -99,7 +99,7 @@
 
         <ion-card-content>
           <ion-list>
-            <ng-container *ngFor="let player of players">
+            <ng-container *ngFor="let player of chronicleService.players">
               <ion-item>
                 <ion-label position="stacked">{{ player.name }} {{ playerCitizenshipString(player.key) }} Name</ion-label>
                 <ion-input type="text" [formControlName]="'name' + player.key" [placeholder]="player.name + ' name'"></ion-input>

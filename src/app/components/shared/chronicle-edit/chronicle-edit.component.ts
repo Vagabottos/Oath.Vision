@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { parseOathTTSSavefileString } from '@seiyria/oath-parser';
 import { CensorSensor } from 'censor-sensor';
-import { ChronicleService } from '../../../chronicle.service';
+import { ChronicleService } from '../../../services/chronicle.service';
 
 import { Chronicle, CreateChronicle, OathGame, PlayerColor } from '../../../interfaces';
 
@@ -36,22 +36,9 @@ const actionValidators = [Validators.maxLength(255), cleanText];
 })
 export class ChronicleEditComponent implements OnInit {
 
-  /*
-  030100000410Empire and Exile0002002034151625D1EB07312FE50D8CFFFF083F34FF043005FF0B0F06FF034BFFFF1004FFE02FD512C335331E08AB642AD60907D3A82DD20E0B1C0A211B016F728A9732D413438B14B91D1F232C10009E7F1716415512110C222E201A290D261502242803192B27180EE2E8E0DDDEDADBE4E1EDDFDCE3E6
-  */
-
   @Input() chronicle: Chronicle;
 
   public parsedChronicle: OathGame;
-
-  public players = [
-    { name: 'Chancellor', key: 'Chancellor' },
-    { name: 'Blue',       key: 'Blue' },
-    { name: 'Purple',     key: 'Brown' },
-    { name: 'Red',        key: 'Red' },
-    { name: 'White',      key: 'White' },
-    { name: 'Yellow',     key: 'Yellow' }
-  ];
 
   chronicleForm = new FormGroup({
     seed:             new FormControl('', Validators.compose([Validators.required, cleanText, validChronicleSeed])),

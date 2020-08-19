@@ -10,8 +10,94 @@
   <app-nav-links></app-nav-links>
 
   <div class="content-container">
-    <div>
-      {{ chronicle | json }}
-    </div>
+
+    <ion-row *ngIf="chronicle && chronicleParsedData">
+      <ion-col size="12" size-md="6">
+    
+        <ion-card>
+    
+          <ion-card-header>
+            <ion-button class="action-button" fill="outline" size="small" #seedBtn [attr.data-clipboard-text]="chronicle.seed">
+              <ion-icon slot="icon-only" name="copy"></ion-icon>
+            </ion-button>
+
+            <ion-card-title>{{ chronicleParsedData.chronicleName }} (Tale #{{ chronicleParsedData.gameCount }})</ion-card-title>
+            <ion-card-subtitle>An Oath of {{ chronicleParsedData.oath }}</ion-card-subtitle>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <ion-list>
+              <ion-list-header>Game Information</ion-list-header>
+
+              <ion-item>
+                {{ chronicle.desc || 'This Chronicle has no description.' }}
+              </ion-item>
+
+              <ion-list-header class="ion-margin-top">Players</ion-list-header>
+
+              <ion-item *ngFor="let player of chronicleService.players">
+                <ion-label class="ion-text-wrap">
+                  <h2>{{ player.name }} {{ playerCitizenshipString(player.key) }}</h2>
+                  <p *ngIf="chronicle.playerNames[player.key]"><em>Played by {{ chronicle.playerNames[player.key] }}</em></p>
+                  <p *ngIf="chronicle.playerActions[player.key]">{{ chronicle.playerActions[player.key] }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+
+        </ion-card>
+
+      </ion-col>
+
+      <ion-col size="12" size-md="6">
+    
+        <ion-card>
+    
+          <ion-card-header>
+            <ion-card-title>The World</ion-card-title>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <ion-row *ngFor="let site of chronicleParsedData.sites; let i = index">
+              <ion-col size="12" *ngIf="i === 0" class="world-barrier formatted-name">
+                Cradle
+              </ion-col>
+
+              <ion-col size="12" *ngIf="i === 2" class="world-barrier formatted-name">
+                Provinces
+              </ion-col>
+
+              <ion-col size="12" *ngIf="i === 5" class="world-barrier formatted-name">
+                Hinterland
+              </ion-col>
+
+              <ion-col>
+                <app-sprite [name]="site.name" 
+                            type="site" 
+                            [class.ruined]="site.ruined" 
+                            scaleX="0.75" 
+                            scaleY="0.75" 
+                            *ngIf="site.name !== 'NONE'" 
+                            (click)="viewSite(site.name)"></app-sprite>
+              </ion-col>
+
+              <ion-col *ngFor="let card of site.cards">
+                <app-sprite [showBack]="determineTypeForCard(card.name) === 'relic'" 
+                            [name]="card.name" 
+                            [type]="determineTypeForCard(card.name)" 
+                            scaleX="0.75" 
+                            scaleY="0.75" 
+                            *ngIf="card.name !== 'NONE'" 
+                            (click)="viewCard(card.name)"></app-sprite>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+          
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+
   </div>
 </ion-content>
