@@ -18,7 +18,7 @@ export class ChronicleService {
   public readonly players = [
     { name: 'Chancellor', key: 'Chancellor' },
     { name: 'Blue',       key: 'Blue' },
-    { name: 'Purple',     key: 'Brown' },
+    { name: 'Brown',      key: 'Brown' },
     { name: 'Red',        key: 'Red' },
     { name: 'White',      key: 'White' },
     { name: 'Yellow',     key: 'Yellow' }
