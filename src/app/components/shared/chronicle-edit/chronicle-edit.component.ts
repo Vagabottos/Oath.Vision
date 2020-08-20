@@ -151,6 +151,7 @@ export class ChronicleEditComponent implements OnInit {
       'Yes, Submit',
       async () => {
         const doc = await this.chronicleService.addChronicle(chronicle);
+        this.chronicleForm.reset();
         this.router.navigate(['/view-chronicle', doc.ref.id]);
       }
     );
