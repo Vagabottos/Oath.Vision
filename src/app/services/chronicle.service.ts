@@ -49,6 +49,13 @@ export class ChronicleService {
     return this.afs.doc<Chronicle>(`chronicles/${id}`).valueChanges().pipe(first());
   }
 
+  getChildChronicles(parentId: string): Observable<Chronicle[]> {
+    return this.afs
+      .collection('chronicles', ref => ref.where('parentId', '==', parentId))
+      .valueChanges()
+      .pipe(first()) as Observable<Chronicle[]>;
+  }
+
   getRecentChronicles(): Observable<Chronicle[]> {
     return this.afs
       .collection('chronicles', ref => ref.orderBy('timestamp').limit(6))

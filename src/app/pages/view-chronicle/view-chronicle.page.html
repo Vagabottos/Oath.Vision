@@ -23,6 +23,7 @@
 
             <ion-card-title>{{ chronicleParsedData.chronicleName }} (Tale #{{ chronicleParsedData.gameCount }})</ion-card-title>
             <ion-card-subtitle>An Oath of {{ chronicleParsedData.oath }}</ion-card-subtitle>
+            <ion-card-subtitle>Logged {{ chronicle.timestamp | date }}</ion-card-subtitle>
           </ion-card-header>
     
           <ion-card-content>
@@ -57,6 +58,17 @@
                 </ion-button>
               </ion-item>
               
+              <ion-item *ngIf="childChronicles.length > 0">
+                <ion-label class="ion-text-wrap">
+                  There are chronicles after this, so you can see what happened next.
+                </ion-label>  
+
+                <ion-button slot="end" color="secondary" fill="outline" (click)="loadChildren()">
+                  <ion-icon slot="start" name="library"></ion-icon>
+                  <span class="formatted-name">View Next</span>
+                </ion-button>
+              </ion-item>
+
               <ion-item>
                 <ion-label class="ion-text-wrap">
                   If you continue this chronicle, you can record what comes next for the history books.

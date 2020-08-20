@@ -8,6 +8,7 @@ import { ChronicleService } from '../../services/chronicle.service';
 import { Chronicle, determineTypeForCard, OathGame } from '../../interfaces';
 import { UIService } from '../../services/ui.service';
 import { ViewCardComponent } from '../../components/modals/view-card/view-card.component';
+import { ChildrenChroniclesComponent } from '../../components/modals/childrenchronicles/childrenchronicles.component';
 
 @Component({
   selector: 'app-view-chronicle',
@@ -20,6 +21,8 @@ export class ViewChroniclePage implements OnInit {
 
   public chronicle: Chronicle;
   public chronicleParsedData: OathGame;
+
+  public childChronicles: Chronicle[] = [];
 
   constructor(
     private router: Router,
@@ -44,6 +47,10 @@ export class ViewChroniclePage implements OnInit {
         this.router.navigate(['/']);
         return;
       }
+
+      this.chronicleService.getChildChronicles(id).subscribe(children => {
+        this.childChronicles = children;
+      });
 
       setTimeout(() => {
         const clipboard = new Clipboard((this.seedBtn as any).el);
@@ -79,6 +86,22 @@ export class ViewChroniclePage implements OnInit {
         cardName,
         cardType: type
       }
+    });
+
+    await modal.present();
+  }
+
+  async loadChildren() {
+    const modal = await this.modalCtrl.create({
+      component: ChildrenChroniclesComponent,
+      componentProps: {
+        children: this.childChronicles
+      }
+    });
+
+    modal.onDidDismiss().then(res => {
+      if (!res || !res.data) { return; }
+      this.router.navigate(['/view-chronicle', res.data.id]);
     });
 
     await modal.present();

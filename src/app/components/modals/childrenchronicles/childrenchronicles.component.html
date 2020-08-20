@@ -1,0 +1,31 @@
+  
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      View Next Chronicles
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        Close
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <div class="content-container">
+    <ion-list>
+      <ion-item *ngFor="let child of children; let i = index">
+        <ion-label class="ion-text-wrap">
+          <h3>An Oath of {{ childrenParsed[i].oath }}</h3>
+          <p>Logged {{ child.timestamp | date }}</p>
+          <p>{{ allPlayerNames(child) }}</p>
+        </ion-label>
+
+        <ion-button slot="end" color="secondary" fill="outline" (click)="choose(child)">View</ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

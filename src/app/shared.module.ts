@@ -9,6 +9,7 @@ import { NavLinksComponent } from './components/shared/nav-links/nav-links.compo
 import { SpriteComponent } from './components/shared/sprite/sprite.component';
 import { ViewCardComponent } from './components/modals/view-card/view-card.component';
 import { ChronicleCardComponent } from './components/shared/chronicle-card/chronicle-card.component';
+import { ChildrenChroniclesComponent } from './components/modals/childrenchronicles/childrenchronicles.component';
 
 @NgModule({
   declarations: [
@@ -16,14 +17,16 @@ import { ChronicleCardComponent } from './components/shared/chronicle-card/chron
     ChronicleEditComponent,
     SpriteComponent,
     ChronicleCardComponent,
-    ViewCardComponent
+    ViewCardComponent,
+    ChildrenChroniclesComponent
   ],
   exports: [
     NavLinksComponent,
     ChronicleEditComponent,
     SpriteComponent,
     ChronicleCardComponent,
-    ViewCardComponent
+    ViewCardComponent,
+    ChildrenChroniclesComponent
   ],
   imports: [
     CommonModule,
