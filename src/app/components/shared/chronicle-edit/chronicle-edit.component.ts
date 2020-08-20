@@ -87,7 +87,7 @@ export class ChronicleEditComponent implements OnInit {
   constructor(
     private router: Router,
     private uiService: UIService,
-    private chronicleService: ChronicleService
+    public chronicleService: ChronicleService
   ) { }
 
   ngOnInit() {

@@ -29,7 +29,7 @@ export class ViewChroniclePage implements OnInit {
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
     private uiService: UIService,
-    private chronicleService: ChronicleService
+    public chronicleService: ChronicleService
   ) { }
 
   ngOnInit() {

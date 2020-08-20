@@ -7,7 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o --port 6984 --host=0.0.0.0",
-    "build": "ng build -c prod",
+    "build": "ng build --prod",
     "test": "npm run lint && npm run build",
     "lint": "ng lint",
     "asset:pack": "npm run asset:pack:edifice && npm run asset:pack:relic && npm run asset:pack:site && npm run asset:pack:world && npm run asset:crush",
