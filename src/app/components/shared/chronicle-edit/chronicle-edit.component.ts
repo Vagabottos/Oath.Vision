@@ -13,6 +13,23 @@ const censor = new CensorSensor();
 
 const defaultSeed = `030100000110Empire and Exile0000000123450403FFFFFFFFFFFF0724FFFFFFFFFFFFFFFFFFFF0B19FFFFFFFFFFFFFFFFFFFF000000`;
 
+export function validChildSeed(parentGame: OathGame) {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    try {
+      const value = control.value.trim();
+      const childGame: OathGame = parseOathTTSSavefileString(value);
+
+      if (childGame.gameCount !== parentGame.gameCount + 1) { return { playCount: true }; }
+      if (childGame.chronicleName !== parentGame.chronicleName) { return { chronicleName: true }; }
+
+    } catch {
+      return { validSeed: true };
+    }
+
+    return null;
+  };
+}
+
 export function validChronicleSeed(control: AbstractControl): { [key: string]: any } | null {
   try {
     const value = control.value.trim();
@@ -29,7 +46,7 @@ export function validChronicleSeed(control: AbstractControl): { [key: string]: a
 }
 
 export function cleanText(control: AbstractControl): { [key: string]: any } | null {
-  return censor.isProfaneIsh(control.value) ? { rude: true } : null;
+  return censor.isProfaneIsh(control.value || '') ? { rude: true } : null;
 }
 
 const nameValidators = [Validators.maxLength(25), cleanText];
@@ -43,8 +60,10 @@ const actionValidators = [Validators.maxLength(255), cleanText];
 export class ChronicleEditComponent implements OnInit {
 
   @Input() chronicle: Chronicle;
+  @Input() parentChronicle?: Chronicle;
 
   public parsedChronicle: OathGame;
+  public parsedParentChronicle: OathGame;
 
   chronicleForm = new FormGroup({
     seed:             new FormControl('', Validators.compose([Validators.required, cleanText, validChronicleSeed])),
@@ -73,6 +92,12 @@ export class ChronicleEditComponent implements OnInit {
 
   ngOnInit() {
     if (!this.chronicle) { this.chronicle = CreateChronicle(); }
+    if (this.parentChronicle) {
+      this.parsedParentChronicle = this.chronicleService.parseChronicle(this.parentChronicle.seed);
+      this.chronicleForm.get('seed').setValidators(
+        [Validators.required, cleanText, validChronicleSeed].concat([validChildSeed(this.parsedParentChronicle)]
+      ));
+    }
   }
 
   parseSeed() {
@@ -94,27 +119,31 @@ export class ChronicleEditComponent implements OnInit {
     const chronicle: Chronicle = {
       timestamp: Date.now(),
 
-      seed: form.get('seed').value,
-      desc: form.get('description').value,
+      seed: form.get('seed').value.trim(),
+      desc: form.get('description').value.trim(),
 
       playerNames: {
-        [PlayerColor.Chancellor]: form.get('nameChancellor').value,
-        [PlayerColor.Blue]:       form.get('nameBlue').value,
-        [PlayerColor.Brown]:      form.get('nameBrown').value,
-        [PlayerColor.Red]:        form.get('nameRed').value,
-        [PlayerColor.White]:      form.get('nameWhite').value,
-        [PlayerColor.Yellow]:     form.get('nameYellow').value,
+        [PlayerColor.Chancellor]: form.get('nameChancellor').value.trim(),
+        [PlayerColor.Blue]:       form.get('nameBlue').value.trim(),
+        [PlayerColor.Brown]:      form.get('nameBrown').value.trim(),
+        [PlayerColor.Red]:        form.get('nameRed').value.trim(),
+        [PlayerColor.White]:      form.get('nameWhite').value.trim(),
+        [PlayerColor.Yellow]:     form.get('nameYellow').value.trim(),
       },
 
       playerActions: {
-        [PlayerColor.Chancellor]: form.get('actionChancellor').value,
-        [PlayerColor.Blue]:       form.get('actionBlue').value,
-        [PlayerColor.Brown]:      form.get('actionBrown').value,
-        [PlayerColor.Red]:        form.get('actionRed').value,
-        [PlayerColor.White]:      form.get('actionWhite').value,
-        [PlayerColor.Yellow]:     form.get('actionYellow').value,
+        [PlayerColor.Chancellor]: form.get('actionChancellor').value.trim(),
+        [PlayerColor.Blue]:       form.get('actionBlue').value.trim(),
+        [PlayerColor.Brown]:      form.get('actionBrown').value.trim(),
+        [PlayerColor.Red]:        form.get('actionRed').value.trim(),
+        [PlayerColor.White]:      form.get('actionWhite').value.trim(),
+        [PlayerColor.Yellow]:     form.get('actionYellow').value.trim(),
       }
     };
+
+    if (this.parentChronicle) {
+      chronicle.parentId = this.parentChronicle.id;
+    }
 
     this.uiService.confirm(
       'Submit Chronicle',

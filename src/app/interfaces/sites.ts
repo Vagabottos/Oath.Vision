@@ -29,5 +29,6 @@ export const SiteName = {
 export const SiteNameIndexes = Object.keys(SiteName)
   .reduce((prev, cur) => {
     prev[SiteName[cur]] = cur;
+    prev[SiteName[cur] + 24] = cur;
     return prev;
   }, {});

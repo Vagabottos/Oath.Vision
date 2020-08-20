@@ -2,6 +2,7 @@
 <form #chronicleObj [formGroup]="chronicleForm">
   <ion-row class="ion-wrap">
     <ion-col size="12" size-md="6">
+
       <ion-card>
         <ion-card-header>
           <ion-card-title class="formatted-name">Game Information</ion-card-title>
@@ -22,6 +23,8 @@
                 <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.required">TTS Seed is required<br></ion-text>
                 <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.defaultSeed">You can't submit the default game seed<br></ion-text>
                 <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.rude">Clean up the profanity and re-export the seed<br></ion-text>
+                <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.playCount">Play count should be +1 from the parent game<br></ion-text>
+                <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.chronicleName">Chronicle name should remain the same as the parent game<br></ion-text>
               </ion-label>
             </ion-item>
             
@@ -31,7 +34,6 @@
             </ion-item>
 
             <ion-item class="form-error" *ngIf="chronicleForm.controls.description.invalid && (chronicleForm.controls.description.dirty || chronicleForm.controls.description.touched)">
-              {{ chronicleForm.controls.description.errors | json }}
               <ion-label class="ion-text-wrap">
                 <ion-text color="danger" *ngIf="chronicleForm.controls.description.errors.maxlength">Description must be shorter than 255 characters<br></ion-text>
                 <ion-text color="danger" *ngIf="chronicleForm.controls.description.errors.rude">Clean up the profanity<br></ion-text>
@@ -41,9 +43,49 @@
         </ion-card-content>
       </ion-card>
 
+      <ion-card *ngIf="parsedParentChronicle">
+        <ion-card-header>
+          <ion-card-title class="formatted-name">Previous Game Information</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label>
+                # Games
+              </ion-label>
+
+              <ion-label class="ion-text-right" slot="end">
+                {{ parsedParentChronicle.gameCount }}
+              </ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>
+                Chronicle Name
+              </ion-label>
+
+              <ion-label class="ion-text-right" slot="end">
+                {{ parsedParentChronicle.chronicleName }}
+              </ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>
+                Oath
+              </ion-label>
+
+              <ion-label class="ion-text-right" slot="end">
+                {{ parsedParentChronicle.oath }}
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
       <ion-card *ngIf="parsedChronicle">
         <ion-card-header>
-          <ion-card-title>Parsed Seed Information</ion-card-title>
+          <ion-card-title class="formatted-name">Parsed Seed Information</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>

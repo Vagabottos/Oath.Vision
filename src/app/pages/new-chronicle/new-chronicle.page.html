@@ -10,6 +10,6 @@
   <app-nav-links></app-nav-links>
 
   <div class="content-container">
-    <app-chronicle-edit></app-chronicle-edit>
+    <app-chronicle-edit [parentChronicle]="chronicle" *ngIf="!loading"></app-chronicle-edit>
   </div>
 </ion-content>
