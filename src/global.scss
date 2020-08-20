@@ -108,6 +108,10 @@ ion-list-header {
   font-size: 1.25rem;
 }
 
+ion-list-header .formatted-name {
+  width: 100%;
+}
+
 .action-button {
   --padding-start: 3px;
   --padding-end: 3px;
