@@ -7,12 +7,18 @@ import { CensorSensor } from 'censor-sensor';
 import { ChronicleService } from '../../../services/chronicle.service';
 
 import { Chronicle, CreateChronicle, OathGame, PlayerColor } from '../../../interfaces';
+import { UIService } from '../../../services/ui.service';
 
 const censor = new CensorSensor();
 
+const defaultSeed = `030100000110Empire and Exile0000000123450403FFFFFFFFFFFF0724FFFFFFFFFFFFFFFFFFFF0B19FFFFFFFFFFFFFFFFFFFF000000`;
+
 export function validChronicleSeed(control: AbstractControl): { [key: string]: any } | null {
   try {
-    const parsed = parseOathTTSSavefileString(control.value);
+    const value = control.value.trim();
+    if (value === defaultSeed) { return { defaultSeed: true }; }
+
+    const parsed = parseOathTTSSavefileString(value);
     if (parsed.version.major < 3 && parsed.version.minor < 1) { return { validVersion: true }; }
     if (parsed.version.major > 3) { return { validVersion: true }; }
   } catch {
@@ -61,6 +67,7 @@ export class ChronicleEditComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private uiService: UIService,
     private chronicleService: ChronicleService
   ) { }
 
@@ -109,8 +116,15 @@ export class ChronicleEditComponent implements OnInit {
       }
     };
 
-    const doc = await this.chronicleService.addChronicle(chronicle);
-    this.router.navigate(['/view-chronicle', doc.ref.id]);
+    this.uiService.confirm(
+      'Submit Chronicle',
+      'Are you sure you want to submit this Chronicle? You will not be able to edit it afterwards.',
+      'Yes, Submit',
+      async () => {
+        const doc = await this.chronicleService.addChronicle(chronicle);
+        this.router.navigate(['/view-chronicle', doc.ref.id]);
+      }
+    );
   }
 
 }

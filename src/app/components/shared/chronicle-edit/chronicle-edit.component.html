@@ -20,6 +20,7 @@
                 <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.validSeed">TTS Seed could not be parsed; make sure it is at least version 3.1.0<br></ion-text>
                 <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.validVersion">TTS Seed is older than version 3.1.0 or newer than 4.0.0<br></ion-text>
                 <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.required">TTS Seed is required<br></ion-text>
+                <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.defaultSeed">You can't submit the default game seed<br></ion-text>
                 <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.rude">Clean up the profanity and re-export the seed<br></ion-text>
               </ion-label>
             </ion-item>
