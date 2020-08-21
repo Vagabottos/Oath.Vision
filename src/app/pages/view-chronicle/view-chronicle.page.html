@@ -61,8 +61,19 @@
                 </ion-label>  
 
                 <ion-button slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', chronicle.parentId]">
-                  <ion-icon slot="start" name="library"></ion-icon>
+                  <ion-icon slot="start" name="arrow-back-circle"></ion-icon>
                   <span class="formatted-name">View Previous</span>
+                </ion-button>
+              </ion-item>
+
+              <ion-item *ngIf="chronicle.parentId">
+                <ion-label class="ion-text-wrap">
+                  You can take a trip to the archives and see how the history books were written.
+                </ion-label>  
+
+                <ion-button slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', chronicle.id, 'history']">
+                  <ion-icon slot="start" name="library"></ion-icon>
+                  <span class="formatted-name">View History</span>
                 </ion-button>
               </ion-item>
               
@@ -72,7 +83,7 @@
                 </ion-label>  
 
                 <ion-button *ngIf="childChronicles.length === 1" slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', childChronicles[0].id]">
-                  <ion-icon slot="start" name="library"></ion-icon>
+                  <ion-icon slot="start" name="arrow-forward-circle"></ion-icon>
                   <span class="formatted-name">View Next</span>
                 </ion-button>
 

@@ -1,0 +1,21 @@
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.scrollable {
+  height: calc(100vh - 134px);
+  max-height: calc(100vh - 134px);
+  overflow-y: auto;
+
+}
+
+ion-card {
+  width: 100%;
+
+  ion-card-header {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}

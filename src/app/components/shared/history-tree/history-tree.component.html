@@ -1,0 +1,38 @@
+
+<ion-row>
+  <ion-col *ngFor="let player of chronicleService.players">
+    <ion-button expand="block" [color]="activeHistory === player.name ? 'secondary' : 'tertiary'" (click)="changeHistory(player.name)">{{ player.name }}</ion-button>
+  </ion-col>
+</ion-row>
+
+<div class="scrollable">
+  <ion-row *ngIf="historySuppressed">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>History Suppressed</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        History is written by the victors, and it looks like this chronicle is too long to adequately tell you about the past. Maybe in the future this limit will be lifted.
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+  
+  <ion-row *ngFor="let chronGame of chronicles">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <a [routerLink]="['/view-chronicle', chronGame.chronicle.id]">{{ chronGame.game.chronicleName }} Tale #{{ chronGame.game.gameCount }}</a>
+        </ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <p><em>Logged {{ chronGame.chronicle.timestamp | date }}</em></p>
+        <p>An Oath of {{ chronGame.game.oath }}</p>
+        <p *ngIf="chronGame.chronicle.desc">{{ chronGame.chronicle.desc }}</p>
+        <br>
+        <p><em>{{ activeHistory }}: {{ chronGame.chronicle.playerNames[activeHistory] ? 'Played by ' + chronGame.chronicle.playerNames[activeHistory] : 'No logged player' }}</em></p>
+        <p *ngIf="chronGame.chronicle.playerActions[activeHistory]">{{ chronGame.chronicle.playerActions[activeHistory] || 'This player either has no recorded information or was absent from the game.' }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+</div>

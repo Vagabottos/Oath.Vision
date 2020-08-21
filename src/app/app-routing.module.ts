@@ -19,10 +19,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/view-chronicle/view-chronicle.module').then( m => m.ViewChroniclePageModule)
   },
   {
+    path: 'view-chronicle/:id/history',
+    loadChildren: () => import('./pages/history-chronicle/history-chronicle.module').then( m => m.HistoryChroniclePageModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
   },
+
 
 ];
 

@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <span class="formatted-name">Chronicle History</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-nav-links></app-nav-links>
+
+  <div class="content-container">
+    <app-history-tree [childChronicle]="chronicle" *ngIf="chronicle"></app-history-tree>
+  </div>
+</ion-content>
