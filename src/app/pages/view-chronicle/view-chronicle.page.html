@@ -71,7 +71,12 @@
                   There are chronicles after this, so you can see what happened next.
                 </ion-label>  
 
-                <ion-button slot="end" color="secondary" fill="outline" (click)="loadChildren()">
+                <ion-button *ngIf="childChronicles.length === 1" slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', childChronicles[0].id]">
+                  <ion-icon slot="start" name="library"></ion-icon>
+                  <span class="formatted-name">View Next</span>
+                </ion-button>
+
+                <ion-button *ngIf="childChronicles.length > 1"   slot="end" color="secondary" fill="outline" (click)="loadChildren()">
                   <ion-icon slot="start" name="library"></ion-icon>
                   <span class="formatted-name">View Next</span>
                 </ion-button>
