@@ -29,11 +29,19 @@
           <ion-card-content>
             <ion-list>
               <ion-list-header>
-                <span class="formatted-name">Game Information</span>
+                <span class="formatted-name">World Information</span>
               </ion-list-header>
 
               <ion-item>
                 {{ chronicle.desc || 'This Chronicle has no description.' }}
+              </ion-item>
+
+              <ion-item>
+                <ion-row class="suit-row">
+                  <ion-col class="suit-col" *ngFor="let suit of suitOrder" size="4" size-md="2">
+                    <img class="suit-icon" [src]="'assets/suit/' + suit.suit + '.png'" /> x{{ getCountInDeckForSuit(suit.ref) }}
+                  </ion-col>
+                </ion-row>
               </ion-item>
 
               <ion-list-header class="ion-margin-top"><span class="formatted-name">Players</span></ion-list-header>

@@ -5,7 +5,7 @@ import { IonButton, ModalController } from '@ionic/angular';
 import * as Clipboard from 'clipboard';
 
 import { ChronicleService } from '../../services/chronicle.service';
-import { Chronicle, determineTypeForCard, OathGame } from '../../interfaces';
+import { CardSuits, Chronicle, determineTypeForCard, OathGame, Suit } from '../../interfaces';
 import { UIService } from '../../services/ui.service';
 import { ViewCardComponent } from '../../components/modals/view-card/view-card.component';
 import { ChildrenChroniclesComponent } from '../../components/modals/childrenchronicles/childrenchronicles.component';
@@ -23,6 +23,15 @@ export class ViewChroniclePage implements OnInit {
   public chronicleParsedData: OathGame;
 
   public childChronicles: Chronicle[] = [];
+
+  public suitOrder: Array<{ suit: string, ref: Suit }> = [
+    { suit: 'arcane',   ref: Suit.Arcane },
+    { suit: 'beast',    ref: Suit.Beast },
+    { suit: 'discord',  ref: Suit.Discord },
+    { suit: 'hearth',   ref: Suit.Hearth },
+    { suit: 'nomad',    ref: Suit.Nomad },
+    { suit: 'order',    ref: Suit.Order }
+  ];
 
   constructor(
     private router: Router,
@@ -105,6 +114,11 @@ export class ViewChroniclePage implements OnInit {
     });
 
     await modal.present();
+  }
+
+  public getCountInDeckForSuit(suit: Suit) {
+    const cards = this.chronicleParsedData.world.filter(c => CardSuits[c.name] === suit);
+    return cards.length;
   }
 
 }

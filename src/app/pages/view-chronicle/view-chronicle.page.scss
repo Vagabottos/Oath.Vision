@@ -23,3 +23,19 @@ app-sprite.ruined {
 ion-item {
   margin-left: 20px;
 }
+
+.suit-row {
+  width: 100%;
+  margin-top: 5px;
+
+  .suit-col {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.suit-icon {
+  width: 32px;
+  height: 32px;
+}

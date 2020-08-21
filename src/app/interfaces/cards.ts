@@ -1,7 +1,10 @@
 
 import * as CardToIndexJson from '../../assets/json/cards.json';
+import * as CardSuitJson from '../../assets/json/cardsuits.json';
+import { Suit } from './oathgame';
 
 export const CardName = (CardToIndexJson as any).default || CardToIndexJson;
+export const CardSuits: Record<string, Suit> = (CardSuitJson as any).default || CardSuitJson;
 
 export const CardNameIndexes = Object.keys(CardName)
   .reduce((prev, cur) => {
