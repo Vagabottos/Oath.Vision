@@ -41,8 +41,11 @@ export class ViewChroniclePage implements OnInit {
     public chronicleService: ChronicleService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
+
+    const loading = await this.uiService.loading();
+    await loading.present();
 
     this.chronicleService.getChronicle(id).subscribe(c => {
 
@@ -67,6 +70,8 @@ export class ViewChroniclePage implements OnInit {
           this.uiService.toast('Copied seed to clipboard!');
         });
       });
+
+      loading.dismiss();
 
     });
   }

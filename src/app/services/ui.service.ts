@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UIService {
 
-  constructor(private alertCtrl: AlertController, private toastCtrl: ToastController) { }
+  constructor(
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private toastCtrl: ToastController
+  ) { }
+
+  async loading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...'
+    });
+
+    return loading;
+  }
 
   async toast(message: string) {
     const toast = await this.toastCtrl.create({
