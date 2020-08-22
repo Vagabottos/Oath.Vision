@@ -58,7 +58,7 @@ export class ChronicleService {
 
   getRecentChronicles(): Observable<Chronicle[]> {
     return this.afs
-      .collection('chronicles', ref => ref.orderBy('timestamp').limit(6))
+      .collection('chronicles', ref => ref.orderBy('timestamp', 'desc').limit(6))
       .valueChanges()
       .pipe(first()) as Observable<Chronicle[]>;
   }
