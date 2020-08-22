@@ -9,7 +9,7 @@
   </ion-card-header>
 
   <ion-card-content>
-    <p>{{ chronicle.desc || 'No description entered.' }}</p>
+    <app-read-more [text]="chronicle.desc || 'No description entered.'"></app-read-more>
 
     <p><em>{{ allPlayerNames() }}</em></p>
   </ion-card-content>

@@ -67,7 +67,7 @@ export class ChronicleEditComponent implements OnInit {
 
   chronicleForm = new FormGroup({
     seed:             new FormControl('', Validators.compose([Validators.required, cleanText, validChronicleSeed])),
-    description:      new FormControl('', Validators.compose([Validators.maxLength(255), cleanText])),
+    description:      new FormControl('', Validators.compose([Validators.maxLength(1000), cleanText])),
 
     nameChancellor:   new FormControl('', Validators.compose(nameValidators)),
     nameBlue:         new FormControl('', Validators.compose(nameValidators)),

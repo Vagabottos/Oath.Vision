@@ -127,3 +127,12 @@ ion-list-header .formatted-name {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.readmore-alert .alert-wrapper {
+  min-width: 80%;
+  min-height: 80%;
+
+  .alert-message {
+    max-height: 100%;
+  }
+}

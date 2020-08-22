@@ -33,7 +33,7 @@
               </ion-list-header>
 
               <ion-item>
-                {{ chronicle.desc || 'This Chronicle has no description.' }}
+                <app-read-more [text]="chronicle.desc || 'This Chronicle has no description.'"></app-read-more>
               </ion-item>
 
               <ion-item>
