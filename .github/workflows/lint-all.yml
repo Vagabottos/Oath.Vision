@@ -14,6 +14,9 @@ jobs:
         node-version: [12.x]
 
     steps:
+    - name: Install GraphicsMagick/ImageMagick
+      run: sudo apt-get install graphicsmagick imagemagick
+
     - uses: actions/checkout@v2
     
     - name: Use Node.js ${{ matrix.node-version }}
