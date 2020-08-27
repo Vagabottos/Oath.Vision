@@ -16,7 +16,7 @@ export const SiteName = {
   'Deep Woods': 14,
   'Standing Stones': 15,
   'Ancient City': 16,
-  'The Drowned City': 17,
+  'Drowned City': 17,
   'Great Slum': 18,
   'Buried Giant': 19,
   'Imperial Seat': 20,

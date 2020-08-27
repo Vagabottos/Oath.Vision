@@ -8,7 +8,7 @@ const rimraf = require('rimraf');
 rimraf.sync('raw-images/relic/\+*');
 
 // transform these files to the correct dimensions
-exec('gm mogrify -format "formatted.png" -trim -resize 128x128! "raw-images/relic/*.png"');
+exec('gm mogrify -format "formatted.png" -trim -resize 256x256! "raw-images/relic/*.png"');
 
 // pack textures
 packer(

@@ -35,7 +35,7 @@ export class SpriteComponent implements OnInit {
   }
 
   get imageName() {
-    return this.name.toLowerCase().replace(/[^a-z]/g, '');
+    return this.name;
   }
 
   @Input()

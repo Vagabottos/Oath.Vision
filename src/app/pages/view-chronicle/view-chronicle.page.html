@@ -144,12 +144,19 @@
               </ion-col>
 
               <ion-col *ngFor="let card of site.cards">
-                <app-sprite [showBack]="determineTypeForCard(card.name) === 'relic'" 
+                <app-sprite showBack="true" 
                             [name]="card.name" 
+                            type="relic"
+                            forceWidth="96"
+                            forceHeight="96"
+                            *ngIf="card.name !== 'NONE' && determineTypeForCard(card.name) === 'relic'" 
+                            (click)="viewCard(card.name)"></app-sprite>
+
+                <app-sprite [name]="card.name" 
                             [type]="determineTypeForCard(card.name)" 
                             scaleX="0.75" 
                             scaleY="0.75" 
-                            *ngIf="card.name !== 'NONE'" 
+                            *ngIf="card.name !== 'NONE' && determineTypeForCard(card.name) !== 'relic'" 
                             (click)="viewCard(card.name)"></app-sprite>
               </ion-col>
             </ion-row>
