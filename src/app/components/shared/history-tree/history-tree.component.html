@@ -28,7 +28,8 @@
       <ion-card-content>
         <p><em>Logged {{ chronGame.chronicle.timestamp | date }}</em></p>
         <p>An Oath of {{ chronGame.game.oath }}</p>
-        <p *ngIf="chronGame.chronicle.desc">{{ chronGame.chronicle.desc }}</p>
+
+        <app-read-more [text]="chronGame.chronicle.desc" *ngIf="chronGame.chronicle.desc"></app-read-more>
         <br>
         <p><em>{{ activeHistory }}: {{ chronGame.chronicle.playerNames[activeHistory] ? 'Played by ' + chronGame.chronicle.playerNames[activeHistory] : 'No logged player' }}</em></p>
         <p *ngIf="chronGame.chronicle.playerActions[activeHistory]">{{ chronGame.chronicle.playerActions[activeHistory] || 'This player either has no recorded information or was absent from the game.' }}</p>

@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonButton, ModalController } from '@ionic/angular';
+import { IonButton, ModalController, AlertController } from '@ionic/angular';
 
 import * as Clipboard from 'clipboard';
 
 import { ChronicleService } from '../../services/chronicle.service';
-import { CardSuits, Chronicle, determineTypeForCard, OathGame, Suit } from '../../interfaces';
+import { CardSuits, Chronicle, determineTypeForCard, OathGame, Suit, Site } from '../../interfaces';
 import { UIService } from '../../services/ui.service';
 import { ViewCardComponent } from '../../components/modals/view-card/view-card.component';
 import { ChildrenChroniclesComponent } from '../../components/modals/childrenchronicles/childrenchronicles.component';
@@ -37,6 +37,7 @@ export class ViewChroniclePage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
     private uiService: UIService,
     public chronicleService: ChronicleService
   ) { }
@@ -86,11 +87,37 @@ export class ViewChroniclePage implements OnInit {
   }
 
   async viewCard(cardName: string) {
-    this.viewSpecificCard(cardName, this.determineTypeForCard(cardName));
+    const cardType = this.determineTypeForCard(cardName);
+    if (cardType !== 'relic') {
+      return this.viewSpecificCard(cardName, cardType);
+    }
+    return this.viewSpecificSpoilerCard(cardName, cardType);
   }
 
-  async viewSite(siteName: string) {
-    this.viewSpecificCard(siteName, 'site');
+  async viewSite(site: Site) {
+    if (!site.ruined) {
+      return this.viewSpecificCard(site.name, 'site');
+    }
+    return this.viewSpecificSpoilerCard(site.name, 'site');
+  }
+
+  async viewSpecificSpoilerCard(cardName: string, type: string) {
+
+    if (this.childChronicles.length > 0) {
+      return this.viewSpecificCard(cardName, type);
+    }
+
+    const alert = await this.alertCtrl.create({
+      header: 'Spoiler Warning!',
+      message: 'This card contains spoilers for this chronicle. Are you sure you want to see it?',
+      buttons: ['Cancel', {
+        text: 'Continue',
+        handler: () => this.viewSpecificCard(cardName, type)
+      }]
+    });
+
+    await alert.present();
+
   }
 
   async viewSpecificCard(cardName: string, type: string) {
@@ -102,7 +129,7 @@ export class ViewChroniclePage implements OnInit {
       }
     });
 
-    await modal.present();
+    return modal.present();
   }
 
   async loadChildren() {

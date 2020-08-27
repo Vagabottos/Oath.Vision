@@ -11,26 +11,22 @@ import { ViewCardComponent } from './components/modals/view-card/view-card.compo
 import { ChronicleCardComponent } from './components/shared/chronicle-card/chronicle-card.component';
 import { ChildrenChroniclesComponent } from './components/modals/childrenchronicles/childrenchronicles.component';
 import { HistoryTreeComponent } from './components/shared/history-tree/history-tree.component';
+import { ReadMoreComponent } from './components/shared/read-more/read-more.component';
+
+const components = [
+  NavLinksComponent,
+  ChronicleEditComponent,
+  SpriteComponent,
+  ChronicleCardComponent,
+  ViewCardComponent,
+  ChildrenChroniclesComponent,
+  HistoryTreeComponent,
+  ReadMoreComponent
+];
 
 @NgModule({
-  declarations: [
-    NavLinksComponent,
-    ChronicleEditComponent,
-    SpriteComponent,
-    ChronicleCardComponent,
-    ViewCardComponent,
-    ChildrenChroniclesComponent,
-    HistoryTreeComponent
-  ],
-  exports: [
-    NavLinksComponent,
-    ChronicleEditComponent,
-    SpriteComponent,
-    ChronicleCardComponent,
-    ViewCardComponent,
-    ChildrenChroniclesComponent,
-    HistoryTreeComponent
-  ],
+  declarations: components,
+  exports: components,
   imports: [
     CommonModule,
     RouterModule,

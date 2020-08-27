@@ -33,7 +33,7 @@
               </ion-list-header>
 
               <ion-item>
-                {{ chronicle.desc || 'This Chronicle has no description.' }}
+                <app-read-more [text]="chronicle.desc || 'This Chronicle has no description.'"></app-read-more>
               </ion-item>
 
               <ion-item>
@@ -140,7 +140,7 @@
                             scaleX="0.75" 
                             scaleY="0.75" 
                             *ngIf="site.name !== 'NONE'" 
-                            (click)="viewSite(site.name)"></app-sprite>
+                            (click)="viewSite(site)"></app-sprite>
               </ion-col>
 
               <ion-col *ngFor="let card of site.cards">

@@ -35,7 +35,7 @@
 
             <ion-item class="form-error" *ngIf="chronicleForm.controls.description.invalid && (chronicleForm.controls.description.dirty || chronicleForm.controls.description.touched)">
               <ion-label class="ion-text-wrap">
-                <ion-text color="danger" *ngIf="chronicleForm.controls.description.errors.maxlength">Description must be shorter than 255 characters<br></ion-text>
+                <ion-text color="danger" *ngIf="chronicleForm.controls.description.errors.maxlength">Description must be shorter than 1000 characters<br></ion-text>
                 <ion-text color="danger" *ngIf="chronicleForm.controls.description.errors.rude">Clean up the profanity<br></ion-text>
               </ion-label>
             </ion-item>
