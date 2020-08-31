@@ -6,6 +6,12 @@ import { Suit } from './oathgame';
 export const CardName = (CardToIndexJson as any).default || CardToIndexJson;
 export const CardSuits: Record<string, Suit> = (CardSuitJson as any).default || CardSuitJson;
 
+Object.keys(CardName).forEach(key => {
+  if (!key.includes(`\\`)) { return; }
+
+  CardName[key.split(`\\`).join('')] = CardName[key];
+});
+
 export const CardNameIndexes = Object.keys(CardName)
   .reduce((prev, cur) => {
     prev[CardName[cur]] = cur;
