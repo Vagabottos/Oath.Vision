@@ -19,7 +19,7 @@ export const SiteName = {
   'Drowned City': 17,
   'Great Slum': 18,
   'Buried Giant': 19,
-  'Imperial Seat': 20,
+  'The Tribunal': 20,
   'Shrouded Wood': 21,
   'The Hidden Place': 22,
 
