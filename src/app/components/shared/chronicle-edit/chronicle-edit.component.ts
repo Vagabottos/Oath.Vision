@@ -60,7 +60,7 @@ export class ChronicleEditComponent implements OnInit {
       ));
     }
 
-    if(!this.chronicle.seed) {
+    if (!this.chronicle.seed) {
       const seed = this.route.snapshot.queryParamMap.get('seed');
       this.chronicleForm.get('seed').setValue(seed);
     }
