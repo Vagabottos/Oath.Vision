@@ -79,6 +79,7 @@ export class ChronicleEditComponent implements OnInit {
       timestamp: Date.now(),
 
       name: this.parsedChronicle.chronicleName,
+      taleNumber: this.parsedChronicle.gameCount,
       seed: form.get('seed').value.trim(),
       desc: form.get('description').value.trim(),
 

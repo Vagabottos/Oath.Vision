@@ -4,7 +4,10 @@ export interface Chronicle {
   id?: string;
   parentId?: string;
 
+  // used for querying
   name: string;
+  taleNumber: number;
+
   timestamp: number;
   seed: string;
   desc: string;
@@ -17,6 +20,8 @@ export function CreateChronicle(): Chronicle {
   return {
     timestamp: Date.now(),
     name: '',
+    taleNumber: 0,
+
     seed: '',
     desc: '',
 
