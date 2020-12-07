@@ -27,13 +27,14 @@ const routes: Routes = [
     loadChildren: () => import('./preview-chronicle/preview-chronicle.module').then( m => m.PreviewChroniclePageModule)
   },
   {
+    path: 'search-chronicles',
+    loadChildren: () => import('./search-chronicles/search-chronicles.module').then( m => m.SearchChroniclesPageModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
   },
-
-
-
 ];
 
 @NgModule({

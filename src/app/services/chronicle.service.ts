@@ -70,6 +70,10 @@ export class ChronicleService {
       .collection('chronicles', ref => {
         let baseSearch = ref.orderBy('timestamp', 'desc');
 
+        if (search) {
+          baseSearch = baseSearch.where('name', '==', search);
+        }
+
         if (after) {
           baseSearch = baseSearch.startAfter(after);
         }

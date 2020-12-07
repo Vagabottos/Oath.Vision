@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <span class="formatted-name">Search Chronicles</span>
+    </ion-title>
+  </ion-toolbar>
+  <app-nav-links></app-nav-links>
+</ion-header>
+
+<ion-content>
+  <form #chronicleObj [formGroup]="searchForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Game Name Search</ion-label>
+        <ion-input formControlName="search" placeholder="Spacing and capitalization must be exact!"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+
+  <app-chronicle-list [search]="searchForm.get('search').value"></app-chronicle-list>
+
+</ion-content>
