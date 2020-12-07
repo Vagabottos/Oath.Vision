@@ -13,6 +13,7 @@ import { ChildrenChroniclesComponent } from './components/modals/childrenchronic
 import { HistoryTreeComponent } from './components/shared/history-tree/history-tree.component';
 import { ReadMoreComponent } from './components/shared/read-more/read-more.component';
 import { WorldViewComponent } from './components/shared/world-view/world-view.component';
+import { ChronicleListComponent } from './components/shared/chronicle-list/chronicle-list.component';
 
 const components = [
   NavLinksComponent,
@@ -23,7 +24,8 @@ const components = [
   ChildrenChroniclesComponent,
   HistoryTreeComponent,
   ReadMoreComponent,
-  WorldViewComponent
+  WorldViewComponent,
+  ChronicleListComponent
 ];
 
 @NgModule({

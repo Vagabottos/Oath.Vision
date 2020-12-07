@@ -4,10 +4,10 @@
       <span class="formatted-name">Oath Legacy Vision</span>
     </ion-title>
   </ion-toolbar>
+  <app-nav-links></app-nav-links>
 </ion-header>
 
 <ion-content>
-  <app-nav-links></app-nav-links>
 
   <div class="content-container">
 
@@ -16,19 +16,9 @@
         <h3>Recent Games of Oath</h3>
       </ion-col>
     </ion-row>
-    
-    <ion-row *ngIf="chronicles$ | async as chronicles" class="ion-wrap">
-      <ion-col *ngFor="let chronicle of chronicles; let i = index" 
-               size-xs="12" 
-               size-sm="6" 
-               size-md="4" 
-               [class.ion-hide-sm-down]="i > 1"
-               [class.ion-hide-md-down]="i > 3"
-               [class.ion-hide-lg-down]="i > 5">
-        <app-chronicle-card [chronicle]="chronicle" canNavigate="true"></app-chronicle-card>
-      </ion-col>
-    </ion-row>
 
   </div>
+
+  <app-chronicle-list></app-chronicle-list>
 
 </ion-content>

@@ -77,17 +77,10 @@ ion-header > ion-toolbar {
   background-image: url("assets/bg/provinces.png") !important;
 }
 
-.content-container {
-  background-image: url("assets/bg/oath.png") !important;
+ion-content {
+  --background: #000 url("assets/bg/oath.png") no-repeat center center / cover;
   background-position: 50% 50%;
-  background-size: cover;
-
-  min-height: calc(100vh - 80px);
-  max-height: calc(100vh - 80px);
-
-  position: relative;
-
-  overflow-y: auto;
+  background-size: cover !important;
 }
 
 .form-error {

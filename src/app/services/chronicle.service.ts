@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryDocumentSnapshot } from '@angular/fire/firestore';
 
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 import { parseOathTTSSavefileString } from '@seiyria/oath-parser';
 
@@ -65,10 +65,19 @@ export class ChronicleService {
       .pipe(first()) as Observable<Chronicle[]>;
   }
 
-  getRecentChronicles(): Observable<Chronicle[]> {
+  getChronicleList(after?: QueryDocumentSnapshot<Chronicle>, search?: string): Observable<Array<QueryDocumentSnapshot<Chronicle>>> {
     return this.afs
-      .collection('chronicles', ref => ref.orderBy('timestamp', 'desc').limit(6))
-      .valueChanges()
-      .pipe(first()) as Observable<Chronicle[]>;
+      .collection('chronicles', ref => {
+        let baseSearch = ref.orderBy('timestamp', 'desc');
+
+        if (after) {
+          baseSearch = baseSearch.startAfter(after);
+        }
+
+        return baseSearch.limit(15);
+      })
+      .snapshotChanges()
+      .pipe(map(d => d.map(x => x.payload.doc)))
+      .pipe(first()) as Observable<Array<QueryDocumentSnapshot<Chronicle>>>;
   }
 }

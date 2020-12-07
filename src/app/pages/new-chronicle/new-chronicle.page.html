@@ -4,12 +4,9 @@
       <span class="formatted-name">New Chronicle</span>
     </ion-title>
   </ion-toolbar>
+  <app-nav-links></app-nav-links>
 </ion-header>
 
 <ion-content>
-  <app-nav-links></app-nav-links>
-
-  <div class="content-container">
-    <app-chronicle-edit [parentChronicle]="chronicle" *ngIf="!loading"></app-chronicle-edit>
-  </div>
+  <app-chronicle-edit [parentChronicle]="chronicle" *ngIf="!loading"></app-chronicle-edit>
 </ion-content>

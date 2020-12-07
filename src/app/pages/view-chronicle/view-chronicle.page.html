@@ -4,117 +4,112 @@
       <span class="formatted-name">View Chronicle</span>
     </ion-title>
   </ion-toolbar>
+  <app-nav-links></app-nav-links>
 </ion-header>
 
 <ion-content>
-  <app-nav-links></app-nav-links>
+  <ion-row *ngIf="chronicle && chronicleParsedData">
+    <ion-col size="12" size-md="6">
+  
+      <ion-card>
+  
+        <ion-card-header>
+          <ion-button class="action-button" fill="outline" size="small" #seedBtn [attr.data-clipboard-text]="chronicle.seed">
+            <ion-icon slot="icon-only" name="copy"></ion-icon>
+          </ion-button>
 
-  <div class="content-container">
+          <ion-card-title>{{ chronicleParsedData.chronicleName }} (Tale #{{ chronicleParsedData.gameCount }})</ion-card-title>
+          <ion-card-subtitle>An Oath of {{ chronicleParsedData.oath }}</ion-card-subtitle>
+          <ion-card-subtitle>Logged {{ chronicle.timestamp | date }}</ion-card-subtitle>
+        </ion-card-header>
+  
+        <ion-card-content>
+          <ion-list>
+            <ion-list-header>
+              <span class="formatted-name">World Information</span>
+            </ion-list-header>
 
-    <ion-row *ngIf="chronicle && chronicleParsedData">
-      <ion-col size="12" size-md="6">
-    
-        <ion-card>
-    
-          <ion-card-header>
-            <ion-button class="action-button" fill="outline" size="small" #seedBtn [attr.data-clipboard-text]="chronicle.seed">
-              <ion-icon slot="icon-only" name="copy"></ion-icon>
-            </ion-button>
+            <ion-item>
+              <app-read-more [text]="chronicle.desc || 'This Chronicle has no description.'"></app-read-more>
+            </ion-item>
 
-            <ion-card-title>{{ chronicleParsedData.chronicleName }} (Tale #{{ chronicleParsedData.gameCount }})</ion-card-title>
-            <ion-card-subtitle>An Oath of {{ chronicleParsedData.oath }}</ion-card-subtitle>
-            <ion-card-subtitle>Logged {{ chronicle.timestamp | date }}</ion-card-subtitle>
-          </ion-card-header>
-    
-          <ion-card-content>
-            <ion-list>
-              <ion-list-header>
-                <span class="formatted-name">World Information</span>
-              </ion-list-header>
+            <ion-item>
+              <ion-row class="suit-row">
+                <ion-col class="suit-col" *ngFor="let suit of chronicleService.suitOrder" size="4" size-md="2">
+                  <img class="suit-icon" [src]="'assets/suit/' + suit.suit + '.png'" /> x{{ getCountInDeckForSuit(suit.ref) }}
+                </ion-col>
+              </ion-row>
+            </ion-item>
 
-              <ion-item>
-                <app-read-more [text]="chronicle.desc || 'This Chronicle has no description.'"></app-read-more>
-              </ion-item>
+            <ion-list-header class="ion-margin-top"><span class="formatted-name">Players</span></ion-list-header>
 
-              <ion-item>
-                <ion-row class="suit-row">
-                  <ion-col class="suit-col" *ngFor="let suit of chronicleService.suitOrder" size="4" size-md="2">
-                    <img class="suit-icon" [src]="'assets/suit/' + suit.suit + '.png'" /> x{{ getCountInDeckForSuit(suit.ref) }}
-                  </ion-col>
-                </ion-row>
-              </ion-item>
+            <ion-item *ngFor="let player of chronicleService.players">
+              <ion-label class="ion-text-wrap">
+                <h2>{{ player.name }} {{ playerCitizenshipString(player.key) }}</h2>
+                <p *ngIf="chronicle.playerNames[player.key]"><em>Played by {{ chronicle.playerNames[player.key] }}</em></p>
+                <p *ngIf="chronicle.playerActions[player.key]">{{ chronicle.playerActions[player.key] }}</p>
+              </ion-label>
+            </ion-item>
 
-              <ion-list-header class="ion-margin-top"><span class="formatted-name">Players</span></ion-list-header>
+            <ion-list-header><span class="formatted-name">Actions</span></ion-list-header>
+            <ion-item *ngIf="chronicle.parentId">
+              <ion-label class="ion-text-wrap">
+                This is a continuation of a prior chronicle, so you can see what happened before all this.
+              </ion-label>  
 
-              <ion-item *ngFor="let player of chronicleService.players">
-                <ion-label class="ion-text-wrap">
-                  <h2>{{ player.name }} {{ playerCitizenshipString(player.key) }}</h2>
-                  <p *ngIf="chronicle.playerNames[player.key]"><em>Played by {{ chronicle.playerNames[player.key] }}</em></p>
-                  <p *ngIf="chronicle.playerActions[player.key]">{{ chronicle.playerActions[player.key] }}</p>
-                </ion-label>
-              </ion-item>
+              <ion-button slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', chronicle.parentId]">
+                <ion-icon slot="start" name="arrow-back-circle"></ion-icon>
+                <span class="formatted-name">View Previous</span>
+              </ion-button>
+            </ion-item>
 
-              <ion-list-header><span class="formatted-name">Actions</span></ion-list-header>
-              <ion-item *ngIf="chronicle.parentId">
-                <ion-label class="ion-text-wrap">
-                  This is a continuation of a prior chronicle, so you can see what happened before all this.
-                </ion-label>  
+            <ion-item *ngIf="chronicle.parentId">
+              <ion-label class="ion-text-wrap">
+                You can take a trip to the archives and see how the history books were written.
+              </ion-label>  
 
-                <ion-button slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', chronicle.parentId]">
-                  <ion-icon slot="start" name="arrow-back-circle"></ion-icon>
-                  <span class="formatted-name">View Previous</span>
-                </ion-button>
-              </ion-item>
+              <ion-button slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', chronicle.id, 'history']">
+                <ion-icon slot="start" name="library"></ion-icon>
+                <span class="formatted-name">View History</span>
+              </ion-button>
+            </ion-item>
+            
+            <ion-item *ngIf="childChronicles.length > 0">
+              <ion-label class="ion-text-wrap">
+                There are chronicles after this, so you can see what happened next.
+              </ion-label>  
 
-              <ion-item *ngIf="chronicle.parentId">
-                <ion-label class="ion-text-wrap">
-                  You can take a trip to the archives and see how the history books were written.
-                </ion-label>  
+              <ion-button *ngIf="childChronicles.length === 1" slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', childChronicles[0].id]">
+                <ion-icon slot="start" name="arrow-forward-circle"></ion-icon>
+                <span class="formatted-name">View Next</span>
+              </ion-button>
 
-                <ion-button slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', chronicle.id, 'history']">
-                  <ion-icon slot="start" name="library"></ion-icon>
-                  <span class="formatted-name">View History</span>
-                </ion-button>
-              </ion-item>
-              
-              <ion-item *ngIf="childChronicles.length > 0">
-                <ion-label class="ion-text-wrap">
-                  There are chronicles after this, so you can see what happened next.
-                </ion-label>  
+              <ion-button *ngIf="childChronicles.length > 1"   slot="end" color="secondary" fill="outline" (click)="loadChildren()">
+                <ion-icon slot="start" name="library"></ion-icon>
+                <span class="formatted-name">View Next</span>
+              </ion-button>
+            </ion-item>
 
-                <ion-button *ngIf="childChronicles.length === 1" slot="end" color="secondary" fill="outline" [routerLink]="['/view-chronicle', childChronicles[0].id]">
-                  <ion-icon slot="start" name="arrow-forward-circle"></ion-icon>
-                  <span class="formatted-name">View Next</span>
-                </ion-button>
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                If you continue this chronicle, you can record what comes next for the history books.
+              </ion-label>
 
-                <ion-button *ngIf="childChronicles.length > 1"   slot="end" color="secondary" fill="outline" (click)="loadChildren()">
-                  <ion-icon slot="start" name="library"></ion-icon>
-                  <span class="formatted-name">View Next</span>
-                </ion-button>
-              </ion-item>
+              <ion-button slot="end" color="secondary" fill="outline" [routerLink]="['/from-chronicle', chronicle.id]">
+                <ion-icon slot="start" name="golf"></ion-icon>
+                <span class="formatted-name">Record</span>
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
 
-              <ion-item>
-                <ion-label class="ion-text-wrap">
-                  If you continue this chronicle, you can record what comes next for the history books.
-                </ion-label>
+      </ion-card>
 
-                <ion-button slot="end" color="secondary" fill="outline" [routerLink]="['/from-chronicle', chronicle.id]">
-                  <ion-icon slot="start" name="golf"></ion-icon>
-                  <span class="formatted-name">Record</span>
-                </ion-button>
-              </ion-item>
-            </ion-list>
-          </ion-card-content>
+    </ion-col>
 
-        </ion-card>
+    <ion-col size="12" size-md="6">
+      <app-world-view [hasChildChronicles]="childChronicles.length > 0" [parsedChronicle]="chronicleParsedData"></app-world-view>
+    </ion-col>
 
-      </ion-col>
-
-      <ion-col size="12" size-md="6">
-        <app-world-view [hasChildChronicles]="childChronicles.length > 0" [parsedChronicle]="chronicleParsedData"></app-world-view>
-      </ion-col>
-
-    </ion-row>
-
-  </div>
+  </ion-row>
 </ion-content>

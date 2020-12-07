@@ -1,0 +1,16 @@
+
+<ion-row *ngIf="chronicles.length > 0" class="ion-wrap">
+  <ion-col *ngFor="let chronicle of chronicles; let i = index" 
+            size-xs="12" 
+            size-sm="6" 
+            size-lg="4">
+    <app-chronicle-card [chronicle]="chronicle" canNavigate="true"></app-chronicle-card>
+  </ion-col>
+</ion-row>
+
+<ion-infinite-scroll (ionInfinite)="getMoreData($event)">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more chronicles...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
