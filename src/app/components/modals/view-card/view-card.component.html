@@ -2,7 +2,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      View Card
+      {{ cardName }}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
@@ -13,9 +13,32 @@
 </ion-header>
 
 <ion-content padding>
-  
-  <div class="content-container">
-    <app-sprite [name]="cardName" [type]="cardType" scaleX="1.5" scaleY="1.5"></app-sprite>
-  </div>
+
+  <ion-row class="imgs-row">
+    <ion-col>
+      <app-sprite [name]="cardName" [type]="cardType" scaleX="1.5" scaleY="1.5"></app-sprite>
+    </ion-col>
+
+    <ion-col *ngIf="faqs.length > 0 && secondaryCardName">
+      <app-sprite [name]="secondaryCardName" [type]="cardType" scaleX="1.5" scaleY="1.5"></app-sprite>
+    </ion-col>
+  </ion-row>
+
+  <ion-list *ngIf="faqs.length > 0">
+    <ion-item *ngFor="let faq of faqs">
+      <ion-label class="ion-text-wrap">
+        <h3>Q: {{ faq.q }}</h3>
+        <p>A: {{ faq.a }}</p>
+      </ion-label>
+
+      <ion-button *ngFor="let card of faq.cards" fill="outline" (click)="secondaryCardName = card">
+        {{ card }}
+      </ion-button>
+
+      <ion-button *ngFor="let rule of faq.rules" fill="outline" target="_blank" [href]="'https://oath.seiyria.com/#' + rule">
+        {{ rule }}
+      </ion-button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

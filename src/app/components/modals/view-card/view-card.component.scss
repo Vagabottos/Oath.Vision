@@ -1,5 +1,15 @@
 
-.content-container {
+.imgs-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  ion-col {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.sprite-container {
   height: 100%;
   min-height: 100%;
   max-height: 100%;

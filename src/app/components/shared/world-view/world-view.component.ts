@@ -61,6 +61,7 @@ export class WorldViewComponent implements OnInit {
   async viewSpecificCard(cardName: string, type: string) {
     const modal = await this.modalCtrl.create({
       component: ViewCardComponent,
+      cssClass: 'big-alert',
       componentProps: {
         cardName,
         cardType: type

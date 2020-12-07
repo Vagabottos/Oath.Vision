@@ -121,7 +121,7 @@ ion-list-header .formatted-name {
   overflow: hidden;
 }
 
-.readmore-alert .alert-wrapper {
+.readmore-alert .alert-wrapper, .big-alert .modal-wrapper {
   min-width: 80%;
   max-height: 80%;
 
@@ -138,44 +138,51 @@ ion-list-header .formatted-name {
   color: #fff !important;
 }
 
+ion-card, ion-list, ion-alert .alert-wrapper, ion-loading .loading-wrapper {
+  --background: #d6d6d6;
+  --ion-card-background: #d6d6d6;
+  --ion-item-background: #d6d6d6;
+}
+
 ion-card, ion-list, ion-alert .alert-wrapper {
-  --ion-color-primary: #ff8f66;
-  --ion-color-secondary: #ff8f66;
+  --ion-color-primary: #fd5b20;
+  --ion-color-secondary: #fd5b20;
 
   a, ion-button, ion-icon {
-    color: #ff8f66;
+    color: #fd5b20;
   }
 }
 
 ion-card {
-  --ion-card-background: #956b96;
-  color: #fff;
+  color: #000;
 
   ion-card-title {
-    color: #fff;
+    color: #000;
   }
 
   ion-card-subtitle {
-    color: #ccc;
+    color: #333;
   }
 }
 
 ion-list {
-  --ion-item-background: #956b96;
-  
   ion-item, ion-list-header {
-    color: #fff;
+    color: #000;
   }
 
   ion-label p em {
-    color: #ccc;
+    color: #333;
   }
 }
 
-ion-alert .alert-wrapper {
-  --background: #956b96;
-  
+ion-alert .alert-wrapper {  
   .alert-head .alert-title, .alert-message {
-    color: #fff;
+    color: #000;
+  }
+}
+
+ion-loading .loading-wrapper {
+  .loading-content {
+    color: #000;
   }
 }
