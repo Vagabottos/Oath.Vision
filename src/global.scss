@@ -123,7 +123,7 @@ ion-list-header .formatted-name {
 
 .readmore-alert .alert-wrapper {
   min-width: 80%;
-  min-height: 80%;
+  max-height: 80%;
 
   .alert-message {
     max-height: 100%;
@@ -136,4 +136,46 @@ ion-list-header .formatted-name {
 
 .infinite-loading-text {
   color: #fff !important;
+}
+
+ion-card, ion-list, ion-alert .alert-wrapper {
+  --ion-color-primary: #ff8f66;
+  --ion-color-secondary: #ff8f66;
+
+  a, ion-button, ion-icon {
+    color: #ff8f66;
+  }
+}
+
+ion-card {
+  --ion-card-background: #956b96;
+  color: #fff;
+
+  ion-card-title {
+    color: #fff;
+  }
+
+  ion-card-subtitle {
+    color: #ccc;
+  }
+}
+
+ion-list {
+  --ion-item-background: #956b96;
+  
+  ion-item, ion-list-header {
+    color: #fff;
+  }
+
+  ion-label p em {
+    color: #ccc;
+  }
+}
+
+ion-alert .alert-wrapper {
+  --background: #956b96;
+  
+  .alert-head .alert-title, .alert-message {
+    color: #fff;
+  }
 }
