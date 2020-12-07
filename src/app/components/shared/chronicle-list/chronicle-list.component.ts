@@ -21,7 +21,6 @@ export class ChronicleListComponent implements OnInit {
   }
 
   getMoreData($event?) {
-    console.log('called');
     this.chronicleService.getChronicleList(this.lastChronicle)
       .subscribe(c => {
         this.chronicles.push(...c.map(d => d.data()));
