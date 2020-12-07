@@ -24,20 +24,10 @@ export class ViewChroniclePage implements OnInit {
 
   public childChronicles: Chronicle[] = [];
 
-  public suitOrder: Array<{ suit: string, ref: Suit }> = [
-    { suit: 'arcane',   ref: Suit.Arcane },
-    { suit: 'beast',    ref: Suit.Beast },
-    { suit: 'discord',  ref: Suit.Discord },
-    { suit: 'hearth',   ref: Suit.Hearth },
-    { suit: 'nomad',    ref: Suit.Nomad },
-    { suit: 'order',    ref: Suit.Order }
-  ];
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
-    private alertCtrl: AlertController,
     private uiService: UIService,
     public chronicleService: ChronicleService
   ) { }
@@ -80,56 +70,6 @@ export class ViewChroniclePage implements OnInit {
   playerCitizenshipString(color: string): string {
     if (!this.chronicleParsedData) { return 'Player'; }
     return this.chronicleParsedData.playerCitizenship[color];
-  }
-
-  determineTypeForCard(cardName: string): string {
-    return determineTypeForCard(cardName);
-  }
-
-  async viewCard(cardName: string) {
-    const cardType = this.determineTypeForCard(cardName);
-    if (cardType !== 'relic') {
-      return this.viewSpecificCard(cardName, cardType);
-    }
-    return this.viewSpecificSpoilerCard(cardName, cardType);
-  }
-
-  async viewSite(site: Site) {
-    if (!site.ruined) {
-      return this.viewSpecificCard(site.name, 'site');
-    }
-    return this.viewSpecificSpoilerCard(site.name, 'site');
-  }
-
-  async viewSpecificSpoilerCard(cardName: string, type: string) {
-
-    if (this.childChronicles.length > 0) {
-      return this.viewSpecificCard(cardName, type);
-    }
-
-    const alert = await this.alertCtrl.create({
-      header: 'Spoiler Warning!',
-      message: 'This card contains spoilers for this chronicle. Are you sure you want to see it?',
-      buttons: ['Cancel', {
-        text: 'Continue',
-        handler: () => this.viewSpecificCard(cardName, type)
-      }]
-    });
-
-    await alert.present();
-
-  }
-
-  async viewSpecificCard(cardName: string, type: string) {
-    const modal = await this.modalCtrl.create({
-      component: ViewCardComponent,
-      componentProps: {
-        cardName,
-        cardType: type
-      }
-    });
-
-    return modal.present();
   }
 
   async loadChildren() {

@@ -38,7 +38,7 @@
 
               <ion-item>
                 <ion-row class="suit-row">
-                  <ion-col class="suit-col" *ngFor="let suit of suitOrder" size="4" size-md="2">
+                  <ion-col class="suit-col" *ngFor="let suit of chronicleService.suitOrder" size="4" size-md="2">
                     <img class="suit-icon" [src]="'assets/suit/' + suit.suit + '.png'" /> x{{ getCountInDeckForSuit(suit.ref) }}
                   </ion-col>
                 </ion-row>
@@ -111,59 +111,7 @@
       </ion-col>
 
       <ion-col size="12" size-md="6">
-    
-        <ion-card>
-    
-          <ion-card-content class="ion-no-padding">
-            <ion-row *ngFor="let site of chronicleParsedData.sites; let i = index" 
-                     class="ion-padding-start ion-padding-end"
-                     [class.cradle]="i < 2" 
-                     [class.provinces]="i >= 2 && i < 5" 
-                     [class.hinterland]="i >= 5">
-              <ion-col size="12" *ngIf="i === 0" class="world-barrier formatted-name visible-name">
-                Cradle
-              </ion-col>
-
-              <ion-col size="12" *ngIf="i === 2" class="world-barrier formatted-name visible-name">
-                Provinces
-              </ion-col>
-
-              <ion-col size="12" *ngIf="i === 5" class="world-barrier formatted-name visible-name">
-                Hinterland
-              </ion-col>
-
-              <ion-col>
-                <app-sprite [name]="site.name" 
-                            type="site" 
-                            [showBack]="site.ruined"
-                            [class.ruined]="site.ruined" 
-                            scaleX="0.75" 
-                            scaleY="0.75" 
-                            *ngIf="site.name !== 'NONE'" 
-                            (click)="viewSite(site)"></app-sprite>
-              </ion-col>
-
-              <ion-col *ngFor="let card of site.cards">
-                <app-sprite showBack="true" 
-                            [name]="card.name" 
-                            type="relic"
-                            forceWidth="96"
-                            forceHeight="96"
-                            *ngIf="card.name !== 'NONE' && determineTypeForCard(card.name) === 'relic'" 
-                            (click)="viewCard(card.name)"></app-sprite>
-
-                <app-sprite [name]="card.name" 
-                            [type]="determineTypeForCard(card.name)" 
-                            scaleX="0.75" 
-                            scaleY="0.75" 
-                            *ngIf="card.name !== 'NONE' && determineTypeForCard(card.name) !== 'relic'" 
-                            (click)="viewCard(card.name)"></app-sprite>
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
-          
-        </ion-card>
-
+        <app-world-view [hasChildChronicles]="childChronicles.length > 0" [parsedChronicle]="chronicleParsedData"></app-world-view>
       </ion-col>
 
     </ion-row>

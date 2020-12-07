@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { parseOathTTSSavefileString } from '@seiyria/oath-parser';
 
-import { Chronicle, OathGame } from '../interfaces';
+import { Chronicle, OathGame, Suit } from '../interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,6 +14,15 @@ import { Observable } from 'rxjs';
 export class ChronicleService {
 
   private chronicleCollection: AngularFirestoreCollection<Chronicle>;
+
+  public readonly suitOrder: Array<{ suit: string, ref: Suit }> = [
+    { suit: 'arcane',   ref: Suit.Arcane },
+    { suit: 'beast',    ref: Suit.Beast },
+    { suit: 'discord',  ref: Suit.Discord },
+    { suit: 'hearth',   ref: Suit.Hearth },
+    { suit: 'nomad',    ref: Suit.Nomad },
+    { suit: 'order',    ref: Suit.Order }
+  ];
 
   public readonly players = [
     { name: 'Chancellor', key: 'Chancellor' },

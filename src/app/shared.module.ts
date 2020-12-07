@@ -12,6 +12,7 @@ import { ChronicleCardComponent } from './components/shared/chronicle-card/chron
 import { ChildrenChroniclesComponent } from './components/modals/childrenchronicles/childrenchronicles.component';
 import { HistoryTreeComponent } from './components/shared/history-tree/history-tree.component';
 import { ReadMoreComponent } from './components/shared/read-more/read-more.component';
+import { WorldViewComponent } from './components/shared/world-view/world-view.component';
 
 const components = [
   NavLinksComponent,
@@ -21,7 +22,8 @@ const components = [
   ViewCardComponent,
   ChildrenChroniclesComponent,
   HistoryTreeComponent,
-  ReadMoreComponent
+  ReadMoreComponent,
+  WorldViewComponent
 ];
 
 @NgModule({

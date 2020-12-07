@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <span class="formatted-name">Preview Chronicle</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-nav-links></app-nav-links>
+
+  <div class="content-container">
+
+    <form #chronicleObj [formGroup]="chronicleForm">
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">TTS Seed</ion-label>
+          <ion-textarea formControlName="seed" placeholder="Export your game seed from TTS" (ionChange)="parseSeed()" rows="2"></ion-textarea>
+        </ion-item>
+
+        <ion-item class="form-error" *ngIf="chronicleForm.controls.seed.invalid && (chronicleForm.controls.seed.dirty || chronicleForm.controls.seed.touched)">
+          <ion-label class="ion-text-wrap">
+            <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.validSeed">TTS Seed could not be parsed; make sure it is at least version 3.1.0<br></ion-text>
+            <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.validVersion">TTS Seed is older than version 3.1.0 or newer than 4.0.0<br></ion-text>
+            <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.required">TTS Seed is required<br></ion-text>
+            <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.defaultSeed">You can't submit the default game seed<br></ion-text>
+            <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.rude">Clean up the profanity and re-export the seed<br></ion-text>
+            <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.playCount">Play count should be +1 from the parent game<br></ion-text>
+            <ion-text color="danger" *ngIf="chronicleForm.controls.seed.errors.chronicleName">Chronicle name should remain the same as the parent game<br></ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </form>
+
+
+    <ion-row *ngIf="parsedChronicle">
+      <ion-col size="12" size-md="6">
+    
+        <ion-card>
+    
+          <ion-card-header>
+            <ion-card-title>{{ parsedChronicle.chronicleName }} (Tale #{{ parsedChronicle.gameCount }})</ion-card-title>
+            <ion-card-subtitle>An Oath of {{ parsedChronicle.oath }}</ion-card-subtitle>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <ion-list>
+              <ion-list-header>
+                <span class="formatted-name">World Information</span>
+              </ion-list-header>
+
+              <ion-item>
+                <ion-row class="suit-row">
+                  <ion-col class="suit-col" *ngFor="let suit of chronicleService.suitOrder" size="4" size-md="2">
+                    <img class="suit-icon" [src]="'assets/suit/' + suit.suit + '.png'" /> x{{ getCountInDeckForSuit(suit.ref) }}
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+
+              <ion-list-header class="ion-margin-top"><span class="formatted-name">Players</span></ion-list-header>
+
+              <ion-item *ngFor="let player of chronicleService.players">
+                <ion-label class="ion-text-wrap">
+                  <h2>{{ player.name }} {{ playerCitizenshipString(player.key) }}</h2>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+
+        </ion-card>
+
+      </ion-col>
+
+      <ion-col size="12" size-md="6">
+        <app-world-view [parsedChronicle]="parsedChronicle"></app-world-view>
+      </ion-col>
+
+    </ion-row>
+
+  </div>
+
+</ion-content>
