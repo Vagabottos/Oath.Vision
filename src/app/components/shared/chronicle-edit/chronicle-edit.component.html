@@ -30,7 +30,7 @@
             
             <ion-item>
               <ion-label position="stacked">Game Description</ion-label>
-              <ion-textarea formControlName="description" placeholder="Describe your setting, world decisions, etc" rows="5"></ion-textarea>
+              <ion-textarea formControlName="description" placeholder="Describe your setting, world decisions, etc that led to this world state" rows="5"></ion-textarea>
             </ion-item>
 
             <ion-item class="form-error" *ngIf="chronicleForm.controls.description.invalid && (chronicleForm.controls.description.dirty || chronicleForm.controls.description.touched)">
@@ -157,7 +157,7 @@
 
               <ion-item>
                 <ion-label position="stacked">{{ player.name }} {{ playerCitizenshipString(player.key) }} Actions</ion-label>
-                <ion-textarea [formControlName]="'action' + player.key" [placeholder]="player.name + ' actions'"></ion-textarea>
+                <ion-textarea [formControlName]="'action' + player.key" [placeholder]="player.name + ' actions that led to this world state'"></ion-textarea>
               </ion-item>
 
               <ion-item class="form-error" *ngIf="chronicleForm.controls['action' + player.key].invalid && (chronicleForm.controls['action' + player.key].dirty || chronicleForm.controls['action' + player.key].touched)">
