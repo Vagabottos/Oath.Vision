@@ -42,6 +42,9 @@
         </ion-card-header>
   
         <ion-card-content>
+
+          <ion-button expand="block" fill="outline" [routerLink]="['/new-chronicle']" [queryParams]="{ seed: chronicleForm.get('seed').value }">Record this Seed</ion-button>
+
           <ion-list>
             <ion-list-header>
               <span class="formatted-name">World Information</span>

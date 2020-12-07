@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ChronicleService } from '../../../services/chronicle.service';
 
@@ -18,6 +18,7 @@ const actionValidators = [Validators.maxLength(255), cleanText];
 })
 export class ChronicleEditComponent implements OnInit {
 
+  @Input() seed: string;
   @Input() chronicle: Chronicle;
   @Input() parentChronicle?: Chronicle;
 
@@ -45,6 +46,7 @@ export class ChronicleEditComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private uiService: UIService,
     public chronicleService: ChronicleService
   ) { }
@@ -56,6 +58,11 @@ export class ChronicleEditComponent implements OnInit {
       this.chronicleForm.get('seed').setValidators(
         [Validators.required, cleanText, validChronicleSeed].concat([validChildSeed(this.parsedParentChronicle)]
       ));
+    }
+
+    if(!this.chronicle.seed) {
+      const seed = this.route.snapshot.queryParamMap.get('seed');
+      this.chronicleForm.get('seed').setValue(seed);
     }
   }
 
