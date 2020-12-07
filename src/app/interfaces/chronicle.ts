@@ -4,6 +4,7 @@ export interface Chronicle {
   id?: string;
   parentId?: string;
 
+  name: string;
   timestamp: number;
   seed: string;
   desc: string;
@@ -15,6 +16,7 @@ export interface Chronicle {
 export function CreateChronicle(): Chronicle {
   return {
     timestamp: Date.now(),
+    name: '',
     seed: '',
     desc: '',
 

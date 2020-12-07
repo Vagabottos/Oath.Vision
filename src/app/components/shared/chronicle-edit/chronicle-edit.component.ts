@@ -78,6 +78,7 @@ export class ChronicleEditComponent implements OnInit {
     const chronicle: Chronicle = {
       timestamp: Date.now(),
 
+      name: this.parsedChronicle.chronicleName,
       seed: form.get('seed').value.trim(),
       desc: form.get('description').value.trim(),
 
