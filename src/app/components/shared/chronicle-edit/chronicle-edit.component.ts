@@ -82,7 +82,7 @@ export class ChronicleEditComponent implements OnInit {
   }
 
   async createNewChronicle() {
-    if(!this.parsedChronicle) { return; }
+    if (!this.parsedChronicle) { return; }
 
     const form = this.chronicleForm;
 
