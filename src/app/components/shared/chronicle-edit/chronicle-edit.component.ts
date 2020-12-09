@@ -63,7 +63,9 @@ export class ChronicleEditComponent implements OnInit {
     if (!this.chronicle.seed) {
       const seed = this.route.snapshot.queryParamMap.get('seed');
       this.chronicleForm.get('seed').setValue(seed);
+      this.parseSeed();
     }
+
   }
 
   parseSeed() {
@@ -80,6 +82,8 @@ export class ChronicleEditComponent implements OnInit {
   }
 
   async createNewChronicle() {
+    if(!this.parsedChronicle) return;
+
     const form = this.chronicleForm;
 
     const chronicle: Chronicle = {
