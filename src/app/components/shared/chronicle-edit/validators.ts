@@ -5,6 +5,9 @@ import { CensorSensor } from 'censor-sensor';
 import { OathGame } from '../../../interfaces';
 
 const censor = new CensorSensor();
+censor.disableTier(4);
+censor.disableTier(3);
+censor.disableTier(2);
 
 export const defaultSeed = `030100000110Empire and Exile0000000123450403FFFFFFFFFFFF0724FFFFFFFFFFFFFFFFFFFF0B19FFFFFFFFFFFFFFFFFFFF000000`;
 
