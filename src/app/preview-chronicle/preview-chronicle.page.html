@@ -73,11 +73,11 @@
       <ion-card>
   
         <ion-card-header>
-          <ion-card-title>Spoilers</ion-card-title>
+          <ion-card-title (click)="viewSpoilers = !viewSpoilers">Spoilers</ion-card-title>
         </ion-card-header>
   
         <ion-card-content>
-          <ion-list>
+          <ion-list *ngIf="viewSpoilers">
             <ion-item>
               <span><strong>Dispossessed</strong>: {{ parsedChronicle.dispossessed.length === 0 ? 'Empty' : dispossessedString(parsedChronicle.dispossessed) }}</span>
             </ion-item>

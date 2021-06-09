@@ -13,6 +13,7 @@ import { ChronicleService } from '../services/chronicle.service';
 export class PreviewChroniclePage implements OnInit {
 
   public parsedChronicle: OathGame;
+  public viewSpoilers = false;
 
   chronicleForm = new FormGroup({
     seed: new FormControl('', Validators.compose([Validators.required, cleanText, validChronicleSeed])),
