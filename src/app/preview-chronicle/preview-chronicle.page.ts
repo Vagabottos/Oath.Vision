@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { cleanText, defaultSeed, validChronicleSeed } from '../components/shared/chronicle-edit/validators';
-import { CardSuits, OathGame, Suit } from '../interfaces';
+import { Card, CardSuits, OathGame, Suit } from '../interfaces';
 import { ChronicleService } from '../services/chronicle.service';
 
 @Component({
@@ -45,6 +45,10 @@ export class PreviewChroniclePage implements OnInit {
   public getCountInDeckForSuit(suit: Suit) {
     const cards = this.parsedChronicle.world.filter(c => CardSuits[c.name] === suit);
     return cards.length;
+  }
+
+  public dispossessedString(dispossessed: Card[]): string {
+    return dispossessed.map(x => x.name).join(', ');
   }
 
 }

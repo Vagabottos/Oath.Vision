@@ -69,6 +69,22 @@
         </ion-card-content>
 
       </ion-card>
+  
+      <ion-card>
+  
+        <ion-card-header>
+          <ion-card-title>Spoilers</ion-card-title>
+        </ion-card-header>
+  
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <strong>Dispossessed</strong>: {{ parsedChronicle.dispossessed.length === 0 ? 'Empty' : dispossessedString(parsedChronicle.dispossessed) }}
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+
+      </ion-card>
 
     </ion-col>
 
